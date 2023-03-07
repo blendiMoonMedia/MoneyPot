@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "partner_priorities",
+  "info": {
+    "singularName": "partner-priority",
+    "pluralName": "partner-priorities",
+    "displayName": "Partner Priority",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "affiliate_managers",
+  "info": {
+    "singularName": "affiliate-manager",
+    "pluralName": "affiliate-managers",
+    "displayName": "Affiliate Manager",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "skype": {
+      "type": "string"
+    },
+    "telegram": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    }
+  }
+}

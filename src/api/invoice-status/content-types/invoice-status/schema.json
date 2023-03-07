@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "invoice_statuses",
+  "info": {
+    "singularName": "invoice-status",
+    "pluralName": "invoice-statuses",
+    "displayName": "Invoice Status",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

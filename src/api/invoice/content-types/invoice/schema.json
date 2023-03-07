@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "invoices",
+  "info": {
+    "singularName": "invoice",
+    "pluralName": "invoices",
+    "displayName": "Invoice",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "unique": true
+    },
+    "casino": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::casino.casino"
+    },
+    "period": {
+      "type": "date",
+      "required": true
+    },
+    "invoice_status": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::invoice-status.invoice-status"
+    },
+    "payment_type": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::payment-type.payment-type"
+    },
+    "currency": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::currency.currency"
+    },
+    "amount": {
+      "type": "float"
+    }
+  }
+}

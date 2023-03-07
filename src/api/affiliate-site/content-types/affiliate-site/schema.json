@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "affiliate_sites",
+  "info": {
+    "singularName": "affiliate-site",
+    "pluralName": "affiliate-sites",
+    "displayName": "Affiliate Site",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "casino": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::casino.casino",
+      "inversedBy": "affiliate_sites"
+    }
+  }
+}

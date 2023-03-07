@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "partners",
+  "info": {
+    "singularName": "partner",
+    "pluralName": "partners",
+    "displayName": "Partner",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "CompanyName": {
+      "type": "string",
+      "required": true
+    },
+    "address": {
+      "type": "text"
+    },
+    "RegNumber": {
+      "type": "string"
+    },
+    "TaxNumber": {
+      "type": "string"
+    },
+    "InvoiceTo": {
+      "type": "email"
+    },
+    "partner_priority": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::partner-priority.partner-priority"
+    },
+    "affiliate_manager": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::affiliate-manager.affiliate-manager"
+    }
+  }
+}

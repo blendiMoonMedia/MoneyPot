@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "casino_priorities",
+  "info": {
+    "singularName": "casino-priority",
+    "pluralName": "casino-priorities",
+    "displayName": "Casino Priority"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    }
+  }
+}

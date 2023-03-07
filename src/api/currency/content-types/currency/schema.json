@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "currencies",
+  "info": {
+    "singularName": "currency",
+    "pluralName": "currencies",
+    "displayName": "Currency"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Crypto",
+        "Fiat"
+      ]
+    },
+    "casino": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::casino.casino",
+      "inversedBy": "currencies"
+    }
+  }
+}
