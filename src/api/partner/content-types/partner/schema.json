@@ -25,10 +25,16 @@
       "type": "text"
     },
     "RegNumber": {
-      "type": "string"
+      "type": "string",
+      "default": "N/A",
+      "unique": false,
+      "required": true
     },
     "TaxNumber": {
-      "type": "string"
+      "type": "string",
+      "unique": false,
+      "default": "N/A",
+      "required": true
     },
     "InvoiceTo": {
       "type": "email"
@@ -36,7 +42,8 @@
     "partner_priority": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::partner-priority.partner-priority"
+      "target": "api::partner-priority.partner-priority",
+      "required": true
     },
     "affiliate_manager": {
       "type": "relation",
