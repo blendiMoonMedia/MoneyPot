@@ -18,11 +18,6 @@
     "website": {
       "type": "string"
     },
-    "partner": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::partner.partner"
-    },
     "MinPayout": {
       "type": "float"
     },
@@ -37,6 +32,28 @@
       "relation": "oneToMany",
       "target": "api::affiliate-site.affiliate-site",
       "mappedBy": "casino"
+    },
+    "partner": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::partner.partner",
+      "inversedBy": "casinos"
+    },
+    "invoices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::invoice.invoice",
+      "mappedBy": "casino"
+    },
+    "logo": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

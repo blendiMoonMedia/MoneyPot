@@ -42,6 +42,22 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::affiliate-manager.affiliate-manager"
+    },
+    "casinos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::casino.casino",
+      "mappedBy": "partner"
+    },
+    "logo": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

@@ -18,12 +18,9 @@
     },
     "casino": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::casino.casino"
-    },
-    "period": {
-      "type": "date",
-      "required": true
+      "relation": "manyToOne",
+      "target": "api::casino.casino",
+      "inversedBy": "invoices"
     },
     "invoice_status": {
       "type": "relation",
@@ -42,6 +39,28 @@
     },
     "amount": {
       "type": "float"
+    },
+    "BillingMonth": {
+      "type": "integer",
+      "required": true,
+      "max": 12,
+      "min": 1
+    },
+    "BillingYear": {
+      "type": "integer",
+      "max": 2035,
+      "min": 2020,
+      "required": true,
+      "default": 2023
+    },
+    "affiliate_site": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::affiliate-site.affiliate-site",
+      "inversedBy": "invoices"
+    },
+    "AdditonalNotes": {
+      "type": "richtext"
     }
   }
 }

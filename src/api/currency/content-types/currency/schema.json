@@ -4,7 +4,8 @@
   "info": {
     "singularName": "currency",
     "pluralName": "currencies",
-    "displayName": "Currency"
+    "displayName": "Currency",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,7 +13,9 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     },
     "type": {
       "type": "enumeration",
@@ -26,6 +29,10 @@
       "relation": "manyToOne",
       "target": "api::casino.casino",
       "inversedBy": "currencies"
+    },
+    "symbol": {
+      "type": "string",
+      "required": true
     }
   }
 }
