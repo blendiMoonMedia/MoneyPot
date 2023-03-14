@@ -33,15 +33,13 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::affiliate-site.affiliate-site",
-      "mappedBy": "casino",
-      "required": true
+      "mappedBy": "casino"
     },
     "partner": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::partner.partner",
-      "inversedBy": "casinos",
-      "required": true
+      "inversedBy": "casinos"
     },
     "invoices": {
       "type": "relation",
@@ -59,6 +57,11 @@
         "videos",
         "audios"
       ]
+    },
+    "shortName": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }

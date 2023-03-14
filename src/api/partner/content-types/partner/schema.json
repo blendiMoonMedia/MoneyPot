@@ -69,6 +69,16 @@
     },
     "aff_website": {
       "type": "string"
+    },
+    "aff_manager_name": {
+      "type": "string",
+      "unique": false
+    },
+    "aff_manager_skype": {
+      "type": "string"
+    },
+    "aff_manager_email": {
+      "type": "string"
     }
   }
 }

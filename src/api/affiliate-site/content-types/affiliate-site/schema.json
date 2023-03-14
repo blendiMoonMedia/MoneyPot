@@ -40,6 +40,11 @@
       "relation": "oneToMany",
       "target": "api::invoice.invoice",
       "mappedBy": "affiliate_site"
+    },
+    "shortName": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }

@@ -1,10 +1,10 @@
 {
   "kind": "collectionType",
-  "collectionName": "raports",
+  "collectionName": "reports",
   "info": {
-    "singularName": "raport",
-    "pluralName": "raports",
-    "displayName": "Raport",
+    "singularName": "report",
+    "pluralName": "reports",
+    "displayName": "Report",
     "description": ""
   },
   "options": {
@@ -25,9 +25,6 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::casino.casino"
-    },
-    "ReportPeriod": {
-      "type": "date"
     },
     "UClicks": {
       "type": "integer"
@@ -79,6 +76,19 @@
     },
     "FixedFeeTotalCommission": {
       "type": "float"
+    },
+    "BillingMonth": {
+      "type": "integer",
+      "required": true,
+      "max": 12,
+      "min": 1
+    },
+    "BillingYear": {
+      "type": "integer",
+      "required": true,
+      "max": 2035,
+      "default": 2023,
+      "min": 2020
     }
   }
 }
