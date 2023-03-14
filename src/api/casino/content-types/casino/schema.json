@@ -31,13 +31,15 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::affiliate-site.affiliate-site",
-      "mappedBy": "casino"
+      "mappedBy": "casino",
+      "required": true
     },
     "partner": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::partner.partner",
-      "inversedBy": "casinos"
+      "inversedBy": "casinos",
+      "required": true
     },
     "invoices": {
       "type": "relation",
