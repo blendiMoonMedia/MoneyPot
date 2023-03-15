@@ -19,39 +19,50 @@
     "affiliate_site": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::affiliate-site.affiliate-site"
+      "target": "api::affiliate-site.affiliate-site",
+      "required": true
     },
     "casino": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::casino.casino"
+      "target": "api::casino.casino",
+      "required": true
     },
     "UClicks": {
-      "type": "integer"
+      "type": "integer",
+      "default": 0
     },
     "NRCs": {
-      "type": "float"
+      "type": "float",
+      "default": 0
     },
     "FTDs": {
-      "type": "float"
+      "type": "float",
+      "default": 0
     },
     "Depositors": {
-      "type": "integer"
+      "type": "integer",
+      "default": 0
     },
     "Activities": {
-      "type": "integer"
+      "type": "integer",
+      "default": 0
     },
     "Deposits": {
-      "type": "float"
+      "type": "float",
+      "default": 0
     },
     "NGR": {
-      "type": "float"
+      "type": "float",
+      "default": 0
     },
     "RevShare": {
-      "type": "float"
+      "type": "float",
+      "default": 0
     },
     "CPAsRev": {
-      "type": "float"
+      "type": "float",
+      "default": 0
     },
     "FixedFeeRev": {
       "type": "float"
@@ -60,22 +71,27 @@
       "type": "float"
     },
     "ClicksToRegister": {
-      "type": "float"
+      "type": "float",
+      "default": 0
     },
     "Conversion": {
-      "type": "float"
+      "type": "float",
+      "default": 0
     },
     "AffiliateNGR": {
       "type": "float"
     },
     "AffiliateTotalCommission": {
-      "type": "float"
+      "type": "float",
+      "default": 0
     },
     "CPAsTotalCommission": {
-      "type": "float"
+      "type": "float",
+      "default": 0
     },
     "FixedFeeTotalCommission": {
-      "type": "float"
+      "type": "float",
+      "default": 0
     },
     "BillingMonth": {
       "type": "integer",

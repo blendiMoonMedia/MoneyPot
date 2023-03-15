@@ -19,13 +19,13 @@ import {
   Grid,
   RawTable,
 } from "@strapi/design-system";
-import { TPartnerModel } from "../../models";
+import {TInvoiceModel, TPartnerModel} from "../../models";
 
 type TPartners = {
   partner: TPartnerModel;
-  index: number;
 };
-const PartnersAffiliate = ({ partner, index }: TPartners) => {
+const PartnersAffiliate = ({ partner }: TPartners) => {
+
   return (
     <>
       <Box padding={3}>
@@ -63,10 +63,10 @@ const PartnersAffiliate = ({ partner, index }: TPartners) => {
           </Thead>
           <Tbody>
             <Tr>
-              <Td>{partner.affiliate_manager.name ?? "N/A"}</Td>
-              <Td>{partner.affiliate_manager.skype ?? "N/A"}</Td>
-              <Td>{partner.affiliate_manager.telegram ?? "N/A"}</Td>
-              <Td>{partner.affiliate_manager.email ?? "N/A"}</Td>
+              <Td>{partner?.aff_manager_name ?? "N/A"}</Td>
+              <Td>{partner?.aff_manager_skype ?? "N/A"}</Td>
+              <Td>{partner?.aff_manager_telegram ?? "N/A"}</Td>
+              <Td>{partner.aff_manager_email ?? "N/A"}</Td>
             </Tr>
           </Tbody>
         </RawTable>

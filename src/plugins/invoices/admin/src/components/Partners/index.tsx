@@ -60,7 +60,7 @@ const Partners = ({ invoiceData, invoiceStatuses }: TPartners) => {
                 size="S"
               >
                 <AccordionToggle
-                  title={`${singleInvoiceMonth.partner.name}  ${singleInvoiceMonth.partner.partner_priority.name}`}
+                  title={`${singleInvoiceMonth.partner?.name}  ${singleInvoiceMonth.partner.partner_priority?.name}`}
                 />
                 <AccordionContent>
                   <PartnersDetails
@@ -69,7 +69,6 @@ const Partners = ({ invoiceData, invoiceStatuses }: TPartners) => {
                   />
                   <PartnersAffiliate
                     partner={singleInvoiceMonth.partner}
-                    index={index}
                   />
                 </AccordionContent>
               </Accordion>
@@ -112,7 +111,7 @@ const Partners = ({ invoiceData, invoiceStatuses }: TPartners) => {
                     {singleInvoiceMonth.invoices.map(
                       (singleInvoice: any, index: number) => (
                         <Tr key={index}>
-                          <Td>{singleInvoice.name}</Td>
+                          <Td>{singleInvoice?.name}</Td>
                           <Td>{singleInvoice.affiliate_site?.name ?? false}</Td>
                           <Td>{singleInvoice.BillingMonth}</Td>
                           <Td>{singleInvoice.casino?.name}</Td>
@@ -138,7 +137,7 @@ const Partners = ({ invoiceData, invoiceStatuses }: TPartners) => {
                                       key={singleStatus.id}
                                       value={singleStatus.id}
                                     >
-                                      {singleStatus.name}
+                                      {singleStatus?.name}
                                     </Option>
                                   )
                                 )}

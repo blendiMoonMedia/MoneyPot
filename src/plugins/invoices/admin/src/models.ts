@@ -36,13 +36,11 @@ export type TPartnerModel = {
   RegNumber: string;
   TaxNumber: string;
   InvoiceTo: string;
-  affiliate_manager: {
-    id: number;
-    name: string;
-    skype: string;
-    telegram: string;
-    email: string;
-  };
+  aff_manager_name: string;
+  aff_manager_skype: string;
+  aff_manager_telegram: string;
+  aff_manager_email: string;
+
   logo: string;
   partner_priority: TPartnerPriorityModel;
   publishedAt: string;

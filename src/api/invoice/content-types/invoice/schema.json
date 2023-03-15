@@ -14,28 +14,33 @@
   "attributes": {
     "name": {
       "type": "string",
-      "unique": true
+      "unique": true,
+      "required": true
     },
     "casino": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::casino.casino",
-      "inversedBy": "invoices"
+      "inversedBy": "invoices",
+      "required": true
     },
     "invoice_status": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::invoice-status.invoice-status"
+      "target": "api::invoice-status.invoice-status",
+      "required": true
     },
     "payment_type": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::payment-type.payment-type"
+      "target": "api::payment-type.payment-type",
+      "required": true
     },
     "currency": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::currency.currency"
+      "target": "api::currency.currency",
+      "required": true
     },
     "amount": {
       "type": "float"
