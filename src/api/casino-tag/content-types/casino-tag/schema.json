@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "casino_tags",
+  "info": {
+    "singularName": "casino-tag",
+    "pluralName": "casino-tags",
+    "displayName": "Casino Tag",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "TagName": {
+      "type": "string"
+    }
+  }
+}

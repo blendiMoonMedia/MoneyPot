@@ -62,6 +62,11 @@
       "type": "string",
       "required": true,
       "unique": true
+    },
+    "Tag": {
+      "type": "component",
+      "repeatable": true,
+      "component": "csino-tags.tag"
     }
   }
 }

@@ -1,0 +1,21 @@
+{
+  "collectionName": "components_csino_tags_tags",
+  "info": {
+    "displayName": "Tag",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "affiliate_site": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::affiliate-site.affiliate-site"
+    },
+    "Tag": {
+      "displayName": "Tag",
+      "type": "component",
+      "repeatable": false,
+      "component": "tag.tag"
+    }
+  }
+}
