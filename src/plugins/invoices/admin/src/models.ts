@@ -16,7 +16,6 @@ export type TUrlParams = {
 export type TInvoiceModel = {
   length: number;
   invoices: {
-    //make property optional
     length?: number;
     month: {
       name: string;
@@ -41,7 +40,10 @@ export type TPartnerModel = {
   aff_manager_telegram: string;
   aff_manager_email: string;
 
-  logo: string;
+  logo: {
+    id: number;
+    url: string;
+  };
   partner_priority: TPartnerPriorityModel;
   publishedAt: string;
   updatedAt: string;
@@ -53,4 +55,6 @@ export type TPartnerPriorityModel = {
   name: string;
   createdAt: string;
   updatedAt: string;
+  bgColor: string;
+  textColor: string;
 };

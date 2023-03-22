@@ -3,9 +3,8 @@
  * HomePage
  *
  */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
-  BaseHeaderLayout,
   Layout,
   ContentLayout,
   Box,
@@ -15,13 +14,15 @@ import {
   Breadcrumbs,
   Crumb,
   Typography,
+  SearchForm,
+  Searchbar,
 } from "@strapi/design-system";
 import { Cross } from "@strapi/icons";
 import { useInvoiceStatuses } from "../../hooks/usetInvoceStatuses";
 import InvoicesStatusPicker from "../../components/InvoicesStatusPicker";
 import { useInvoicesPerMonth } from "../../hooks/useInvoicePerMonth";
 import { useParams } from "react-router-dom";
-import { TUrlParams } from "../../models";
+import { TInvoiceModel, TUrlParams } from "../../models";
 import InvoicesDatePicker from "../../components/InvoicesDatePicker";
 import Partners from "../../components/Partners";
 
@@ -31,25 +32,46 @@ const Month = () => {
   const currentDate = new Date();
   const urlParams = new URLSearchParams(window.location.search);
   const urlYear = urlParams.get("year");
-  let statusId = urlParams.get("status")
-    ? parseInt(urlParams.get("status") ?? "1")
-    : 1;
+  const [renderKey, setRenderKey] = useState(false);
+
   const [currentYear, setCurrentYear] = useState(
     urlYear ? parseInt(urlYear) : currentDate.getFullYear()
   );
+
   const monthName = new Date(currentYear, month - 1).toLocaleString("default", {
     month: "long",
   });
   const { invoiceStatuses, setInvoiceStatuses, isLoading, isInit } =
     useInvoiceStatuses();
-
+  const [searchValue, setSearchValue] = useState("");
   const { invoicesData } = useInvoicesPerMonth({
     currentYear,
     invoiceStatuses,
     month,
     isLoading,
     isInit,
+    renderKey,
   });
+  const [invoiceSearchData, setInvoiceSearchData] = useState<TInvoiceModel>([]);
+
+  const handleSearch = (e: any) => {
+    let results: TInvoiceModel = [];
+    if (invoicesData) {
+      for (let i = 0; i < invoicesData.length; i++) {
+        //@ts-ignore
+        let matchesPartner = invoicesData[i].partner.name
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase());
+        if (matchesPartner) {
+          results.push(invoicesData[i]);
+        }
+      }
+    }
+
+    setInvoiceSearchData(results ?? []);
+
+    setSearchValue(e.target.value);
+  };
 
   return (
     <Layout>
@@ -76,18 +98,30 @@ const Month = () => {
               />
             )}
           </GridItem>
-          <GridItem col={1}>
-            <InvoicesDatePicker
-              currentYear={currentYear}
-              setCurrentYear={setCurrentYear}
-            />
-          </GridItem>
         </Grid>
+        <div className={"w-25 py-4 px-2"}>
+          <SearchForm>
+            <Searchbar
+              name="searchbar"
+              onClear={() => setSearchValue("")}
+              value={searchValue}
+              onChange={handleSearch}
+              clearLabel="Clearing the plugin search"
+              placeholder="Search partner"
+            >
+              Searching for a plugin
+            </Searchbar>
+          </SearchForm>
+        </div>
         <Box paddingBottom={8}>
           {invoicesData?.length > 0 && invoiceStatuses ? (
             <Partners
-              invoiceData={invoicesData}
+              invoiceData={
+                invoiceSearchData.length > 0 ? invoiceSearchData : invoicesData
+              }
               invoiceStatuses={invoiceStatuses}
+              setRenderKey={setRenderKey}
+              renderKey={renderKey}
             />
           ) : (
             <EmptyStateLayout
@@ -96,7 +130,6 @@ const Month = () => {
             />
           )}
         </Box>
-        <Box paddingBottom={8}></Box>
       </ContentLayout>
     </Layout>
   );

@@ -13,10 +13,9 @@ import {
   Grid,
   GridItem,
 } from "@strapi/design-system";
-import {Cross} from "@strapi/icons";
+import { Cross } from "@strapi/icons";
 import InvoicesDatePicker from "../../components/InvoicesDatePicker";
 import { useInvoiceData } from "../../hooks/useInvoiceData";
-import Partners from "../../components/Partners";
 import InvoicesPerMonth from "../../components/InovicesPerMonth";
 import { useInvoiceStatuses } from "../../hooks/usetInvoceStatuses";
 import InvoicesStatusPicker from "../../components/InvoicesStatusPicker";

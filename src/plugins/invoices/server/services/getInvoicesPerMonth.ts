@@ -43,10 +43,12 @@ export default ({ strapi }: { strapi: Strapi }) => ({
           currency: true,
         },
       });
-      invoicesPerMonth.push({
-        partner: partners,
-        invoices: invoices,
-      });
+      if (invoices.length > 0) {
+        invoicesPerMonth.push({
+          partner: partners,
+          invoices: invoices,
+        });
+      }
     }
     return invoicesPerMonth;
   },

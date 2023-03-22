@@ -10,7 +10,6 @@ export const useInvoiceData = (currentYear: number, invoiceStatuses: any, isLoad
   const [invoicesData, setInvoices] = useState([]);
   const invoicesRequest = async (currentYear: number, statuses: any) => {
     const {primary} = statuses;
-    console.log(statuses);
     try {
       const invoicesData = await request(
         `/${pluginId}?year=${currentYear}&status=${primary.id}`,

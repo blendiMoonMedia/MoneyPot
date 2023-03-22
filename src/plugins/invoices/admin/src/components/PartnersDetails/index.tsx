@@ -12,13 +12,12 @@ import {
   Td,
   Tbody,
   Box,
-  Accordion,
-  AccordionToggle,
-  AccordionContent,
   Typography,
-  Grid,
   RawTable,
+  Link,
 } from "@strapi/design-system";
+import { NavLink } from 'react-router-dom';
+
 import { TPartnerModel } from "../../models";
 
 type TPartners = {
@@ -27,7 +26,8 @@ type TPartners = {
 };
 const PartnersDetails = ({ partner, index }: TPartners) => {
   return (
-    <>
+    <Box
+    >
       <Box padding={3}>
         <Typography variant={"delta"}>Partners Details</Typography>
       </Box>
@@ -62,6 +62,9 @@ const PartnersDetails = ({ partner, index }: TPartners) => {
               <Th>
                 <Typography variant={"delta"}>Invoice To</Typography>
               </Th>
+              <Th>
+                <Typography variant={"delta"}></Typography>
+              </Th>
             </Tr>
           </Thead>
           <Tbody>
@@ -71,11 +74,12 @@ const PartnersDetails = ({ partner, index }: TPartners) => {
               <Td>{partner.RegNumber ?? "N/A"}</Td>
               <Td>{partner.TaxNumber ?? "N/A"}</Td>
               <Td>{partner.InvoiceTo ?? "N/A"}</Td>
+              <Td><Link as={NavLink} to={`/content-manager/collectionType/api::partner.partner/${partner.id}`}>Edit</Link></Td>
             </Tr>
           </Tbody>
         </RawTable>
       </Box>
-    </>
+    </Box>
   );
 };
 

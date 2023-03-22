@@ -1,7 +1,7 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import pluginId from "../pluginId";
-import {request} from "@strapi/helper-plugin";
-import {TInvoiceStatusModel} from "../models";
+import { request } from "@strapi/helper-plugin";
+import { TInvoiceStatusModel } from "../models";
 
 type TUseInvoicePerMonth = {
   currentYear: number;
@@ -10,12 +10,20 @@ type TUseInvoicePerMonth = {
   isLoading: boolean;
 
   isInit: boolean;
-}
+  renderKey?: boolean;
+};
 
-export const useInvoicesPerMonth = ({currentYear, invoiceStatuses, month, isLoading, isInit}: TUseInvoicePerMonth) => {
+export const useInvoicesPerMonth = ({
+  currentYear,
+  invoiceStatuses,
+  month,
+  isLoading,
+  isInit,
+  renderKey,
+}: TUseInvoicePerMonth) => {
   const [invoicesData, setInvoices] = useState([]);
   const invoicesRequest = async (currentYear: number, statuses: any) => {
-    const {primary} = statuses;
+    const { primary } = statuses;
     try {
       const invoicesData = await request(
         `/${pluginId}/invoices-per-month?year=${currentYear}&status=${primary.id}&month=${month}`,
@@ -29,14 +37,11 @@ export const useInvoicesPerMonth = ({currentYear, invoiceStatuses, month, isLoad
     }
   };
 
-  useEffect(
-    () => {
+  useEffect(() => {
+    if (!isLoading && isInit) {
+      invoicesRequest(currentYear, invoiceStatuses);
+    }
+  }, [currentYear, isInit, isLoading, invoiceStatuses, renderKey]);
 
-      if (!isLoading && isInit) {
-        invoicesRequest(currentYear, invoiceStatuses);
-      }
-
-    }, [currentYear, isInit, isLoading, invoiceStatuses]);
-
-  return {invoicesData};
+  return { invoicesData };
 };

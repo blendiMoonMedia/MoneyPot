@@ -49,5 +49,5 @@ export const useInvoiceStatuses = () => {
     getInvoiceStatuses();
   }, []);
 
-  return { invoiceStatuses, setInvoiceStatuses, isLoading, isInit };
+  return { invoiceStatuses, setInvoiceStatuses, isLoading, isInit, setInit };
 };

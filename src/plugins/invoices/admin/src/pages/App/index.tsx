@@ -10,7 +10,9 @@ import { Switch, Route } from 'react-router-dom';
 import { NotFound } from '@strapi/helper-plugin';
 import pluginId from '../../pluginId';
 import HomePage from '../HomePage';
-import Month from "../InvociesPerMonth";
+import Month from "../InvoicesPerMonth";
+import "../../style/tailwind.min.css"
+
 const App = () => {
   return (
     <div>

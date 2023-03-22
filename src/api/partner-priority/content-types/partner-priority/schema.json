@@ -14,6 +14,12 @@
   "attributes": {
     "name": {
       "type": "string"
+    },
+    "bgColor": {
+      "type": "string"
+    },
+    "textColor": {
+      "type": "string"
     }
   }
 }

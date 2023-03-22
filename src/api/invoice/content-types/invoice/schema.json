@@ -61,9 +61,10 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::affiliate-site.affiliate-site",
-      "inversedBy": "invoices"
+      "inversedBy": "invoices",
+      "required": true
     },
-    "AdditonalNotes": {
+    "AdditionalNotes": {
       "type": "richtext"
     }
   }
