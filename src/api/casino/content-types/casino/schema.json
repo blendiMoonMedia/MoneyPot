@@ -33,7 +33,8 @@
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::partner.partner",
-      "inversedBy": "casinos"
+      "inversedBy": "casinos",
+      "required": true
     },
     "invoices": {
       "type": "relation",

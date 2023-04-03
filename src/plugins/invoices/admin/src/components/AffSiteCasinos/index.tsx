@@ -127,7 +127,7 @@ const AffSitesCasinos = ({
                         <div className={"grid grid-cols-2 gap-1"}>
                           {casino.Tag.map((tag: TCasinoTagModel) => {
                             if (tag?.affiliate_site?.id === affSiteId) {
-                              return tag?.Tag.casino_tags.map(
+                              return tag?.Tag?.casino_tags.map(
                                 (
                                   casinoTag: TSingleCasinoTagModel,
                                   tagIndex: number

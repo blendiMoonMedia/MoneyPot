@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import pluginId from "../pluginId";
 import { request } from "@strapi/helper-plugin";
-import {TInvoicesPerMonthModel, TInvoiceStatusModel} from "../models";
+import { TInvoiceStatusModel } from "../models";
 
 export const useInvoiceData = (
   currentYear: number,
