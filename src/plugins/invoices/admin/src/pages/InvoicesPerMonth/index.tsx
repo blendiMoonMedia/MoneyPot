@@ -23,12 +23,15 @@ import InvoicesStatusPicker from "../../components/InvoicesStatusPicker";
 import { useInvoicesPerMonth } from "../../hooks/useInvoicePerMonth";
 import { useParams } from "react-router-dom";
 import { TInvoiceModel, TUrlParams } from "../../models";
-import InvoicesDatePicker from "../../components/InvoicesDatePicker";
 import Partners from "../../components/Partners";
 
-const Month = () => {
+type TMonthModel = {
+  revenueIssue?: boolean;
+};
+
+const Month = ({ revenueIssue }: TMonthModel) => {
   const { id }: TUrlParams = useParams();
-  const month = parseInt(id);
+  const month = revenueIssue ? 0 : parseInt(id);
   const currentDate = new Date();
   const urlParams = new URLSearchParams(window.location.search);
   const urlYear = urlParams.get("year");
@@ -38,11 +41,13 @@ const Month = () => {
     urlYear ? parseInt(urlYear) : currentDate.getFullYear()
   );
 
-  const monthName = new Date(currentYear, month - 1).toLocaleString("default", {
-    month: "long",
-  });
+  const monthName = revenueIssue
+    ? null
+    : new Date(currentYear, month - 1).toLocaleString("default", {
+        month: "long",
+      });
   const { invoiceStatuses, setInvoiceStatuses, isLoading, isInit } =
-    useInvoiceStatuses();
+    useInvoiceStatuses(revenueIssue);
   const [searchValue, setSearchValue] = useState("");
   const { invoicesData } = useInvoicesPerMonth({
     currentYear,

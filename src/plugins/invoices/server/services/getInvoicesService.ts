@@ -3,9 +3,16 @@ import { Strapi } from "@strapi/strapi";
 export default ({ strapi }: { strapi: Strapi }) => ({
   async getInvoices(ctx) {
     let invoicesPerMonth = [];
-    let statusFilter = ctx.query.status
+    const statusFilter = ctx.query.status
       ? {
-          invoice_status: ctx.query.status,
+          $or: [
+            { invoice_status: ctx.query.status },
+            {
+              invoice_status: {
+                invoice_status: ctx.query.status,
+              },
+            },
+          ],
         }
       : {};
 

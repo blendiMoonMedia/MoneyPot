@@ -10,7 +10,7 @@ export const useInvoiceActions = () => {
       await request(`/${pluginId}/${id}`, {
         method: "PUT",
         body: {
-          data
+          data,
         },
       });
       setIsUpdating(false);

@@ -29,12 +29,6 @@
         "audios"
       ]
     },
-    "casino": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::casino.casino",
-      "inversedBy": "affiliate_sites"
-    },
     "invoices": {
       "type": "relation",
       "relation": "oneToMany",
@@ -45,6 +39,12 @@
       "type": "string",
       "required": true,
       "unique": true
+    },
+    "casinos": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::casino.casino",
+      "mappedBy": "affiliate_sites"
     }
   }
 }

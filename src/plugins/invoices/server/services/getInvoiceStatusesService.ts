@@ -1,8 +1,25 @@
-import {Strapi} from '@strapi/strapi';
+import { Strapi } from "@strapi/strapi";
 
-export default ({strapi}: { strapi: Strapi }) => ({
+export default ({ strapi }: { strapi: Strapi }) => ({
   async getInvoiceStatuses(ctx) {
-    const invoiceStatuses = await strapi.query('api::invoice-status.invoice-status').findMany();
+    const invoiceStatusesFilter =
+      ctx.query.invoice_statuses == "true"
+        ? {}
+        : {
+            invoice_status: null,
+          };
+
+    const invoiceStatuses = await strapi
+      .query("api::invoice-status.invoice-status")
+      .findMany({
+        where: {
+          ...invoiceStatusesFilter,
+        },
+        populate: {
+          invoice_statuses: true,
+          invoice_status: true,
+        },
+      });
     let primaryStatus = [];
 
     for (let i = 0; i < invoiceStatuses.length; i++) {
@@ -12,8 +29,7 @@ export default ({strapi}: { strapi: Strapi }) => ({
     }
     return {
       statuses: invoiceStatuses,
-      primary: primaryStatus[0] ?? invoiceStatuses[0]
+      primary: primaryStatus[0] ?? invoiceStatuses[0],
     };
   },
-})
-;
+});

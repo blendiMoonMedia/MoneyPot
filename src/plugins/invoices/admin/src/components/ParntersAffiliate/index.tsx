@@ -66,7 +66,7 @@ const PartnersAffiliate = ({ partner }: TPartners) => {
               <Td>{partner?.aff_manager_name ?? "N/A"}</Td>
               <Td>{partner?.aff_manager_skype ?? "N/A"}</Td>
               <Td>{partner?.aff_manager_telegram ?? "N/A"}</Td>
-              <Td>{partner.aff_manager_email ?? "N/A"}</Td>
+              <Td>{partner?.aff_manager_email ?? "N/A"}</Td>
             </Tr>
           </Tbody>
         </RawTable>

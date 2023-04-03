@@ -3,19 +3,9 @@ import pluginId from "../pluginId";
 import { request } from "@strapi/helper-plugin";
 import { TInvoiceStatusModel } from "../models";
 
-type TInvoiceStatusesRes = {
-  primary: {
-    id: number;
-    name: string;
-  };
-  statuses: {
-    id: number;
-    name: string;
-  }[];
-};
-export const useInvoiceStatuses = () => {
+export const useInvoiceStatuses = (revenueIssues?: boolean) => {
   const [invoiceStatuses, setInvoiceStatuses] =
-    useState<TInvoiceStatusModel | null>(null);
+    useState<TInvoiceStatusModel | undefined>();
   const [isLoading, setIsLoading] = useState(false);
   const [isInit, setInit] = useState(false);
   const urlParams = new URLSearchParams(window.location.search);
@@ -25,16 +15,30 @@ export const useInvoiceStatuses = () => {
   );
   const getInvoiceStatuses = async () => {
     try {
+      let currentPrimary = null;
       setIsLoading(true);
       setInit(true);
-      const invoicesData = await request(`/${pluginId}/statuses`, {
-        method: "GET",
-      });
-      const currentPrimary = statusId
-        ? invoicesData.statuses.find(
-            (status: { id: number; name: string }) => status.id === statusId
-          )
-        : invoicesData.primary;
+      const invoicesData = await request(
+        `/${pluginId}/statuses?invoice_statuses=${revenueIssues ?? false}`,
+        {
+          method: "GET",
+        }
+      );
+      if (!revenueIssues) {
+        currentPrimary = statusId
+          ? invoicesData.statuses.find(
+              (status: { id: number; name: string }) => status.id === statusId
+            )
+          : invoicesData.primary;
+      } else {
+        currentPrimary = revenueIssues
+          ? invoicesData.statuses.find(
+              (status: { isErrorStatus: boolean; name: string }) =>
+                status.isErrorStatus === true
+            )
+          : invoicesData.primary;
+      }
+
       setInvoiceStatuses({
         primary: currentPrimary,
         statuses: invoicesData.statuses,
@@ -45,6 +49,7 @@ export const useInvoiceStatuses = () => {
       console.log(error);
     }
   };
+
   useEffect(() => {
     getInvoiceStatuses();
   }, []);

@@ -4,14 +4,14 @@ import pluginPkg from "../../package.json";
 import pluginId from "./pluginId";
 import Initializer from "./components/Initializer";
 import PluginIcon from "./components/PluginIcon";
-import { FileError } from "@strapi/icons";
+import { FileError, ManyToOne } from "@strapi/icons";
 
 const name = pluginPkg.strapi.name;
 
 export default {
   register(app: any) {
     app.addMenuLink({
-      to: `/plugins/${pluginId}`,
+      to: `/plugins/${pluginId}/home`,
       icon: PluginIcon,
       intlLabel: {
         id: `${pluginId}.plugin.name`,
@@ -20,6 +20,37 @@ export default {
       Component: async () => {
         const component = await import(
           /* webpackChunkName: "[request]" */ "./pages/App"
+        );
+
+        return component;
+      },
+    });
+
+    app.addMenuLink({
+      to: `/plugins/${pluginId}/revenue-issues`,
+      icon: FileError,
+      intlLabel: {
+        id: `${pluginId}.plugin.revenue-issues`,
+        defaultMessage: "Revenue Issues",
+      },
+      Component: async () => {
+        const component = await import(
+          /* webpackChunkName: "[request-reports]" */ "./pages/App"
+        );
+
+        return component;
+      },
+    });
+    app.addMenuLink({
+      to: `/plugins/${pluginId}/affiliate-sites`,
+      icon: ManyToOne,
+      intlLabel: {
+        id: `${pluginId}.plugin.affiliate-sites`,
+        defaultMessage: "Affiliate Sites",
+      },
+      Component: async () => {
+        const component = await import(
+          /* webpackChunkName: "[request-reports]" */ "./pages/App"
         );
 
         return component;

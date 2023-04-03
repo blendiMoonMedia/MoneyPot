@@ -1,15 +1,17 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import pluginId from "../pluginId";
-import {request} from "@strapi/helper-plugin";
+import { request } from "@strapi/helper-plugin";
+import {TInvoicesPerMonthModel, TInvoiceStatusModel} from "../models";
 
-type InvoiceData = {
-  currentYear: number;
-}
-
-export const useInvoiceData = (currentYear: number, invoiceStatuses: any, isLoading: boolean, isInit: boolean) => {
+export const useInvoiceData = (
+  currentYear: number,
+  invoiceStatuses?: TInvoiceStatusModel,
+  isLoading?: boolean,
+  isInit?: boolean
+) => {
   const [invoicesData, setInvoices] = useState([]);
   const invoicesRequest = async (currentYear: number, statuses: any) => {
-    const {primary} = statuses;
+    const { primary } = statuses;
     try {
       const invoicesData = await request(
         `/${pluginId}?year=${currentYear}&status=${primary.id}`,
@@ -23,14 +25,11 @@ export const useInvoiceData = (currentYear: number, invoiceStatuses: any, isLoad
     }
   };
 
-  useEffect(
-    () => {
+  useEffect(() => {
+    if (!isLoading && isInit) {
+      invoicesRequest(currentYear, invoiceStatuses);
+    }
+  }, [currentYear, isInit, isLoading, invoiceStatuses]);
 
-      if (!isLoading && isInit){
-        invoicesRequest(currentYear, invoiceStatuses);
-      }
-
-    }, [currentYear, isInit, isLoading, invoiceStatuses]);
-
-  return {invoicesData};
+  return { invoicesData };
 };

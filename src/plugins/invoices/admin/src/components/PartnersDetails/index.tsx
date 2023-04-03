@@ -69,12 +69,12 @@ const PartnersDetails = ({ partner, index }: TPartners) => {
           </Thead>
           <Tbody>
             <Tr>
-              <Td>{partner.CompanyName}</Td>
-              <Td>{partner.address}</Td>
-              <Td>{partner.RegNumber ?? "N/A"}</Td>
-              <Td>{partner.TaxNumber ?? "N/A"}</Td>
-              <Td>{partner.InvoiceTo ?? "N/A"}</Td>
-              <Td><Link as={NavLink} to={`/content-manager/collectionType/api::partner.partner/${partner.id}`}>Edit</Link></Td>
+              <Td>{partner?.CompanyName}</Td>
+              <Td>{partner?.address}</Td>
+              <Td>{partner?.RegNumber ?? "N/A"}</Td>
+              <Td>{partner?.TaxNumber ?? "N/A"}</Td>
+              <Td>{partner?.InvoiceTo ?? "N/A"}</Td>
+              <Td><Link as={NavLink} to={`/content-manager/collectionType/api::partner.partner/${partner?.id}`}>Edit</Link></Td>
             </Tr>
           </Tbody>
         </RawTable>

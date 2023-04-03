@@ -18,6 +18,28 @@
     "primary": {
       "type": "boolean",
       "default": false
+    },
+    "isErrorStatus": {
+      "type": "boolean",
+      "default": false
+    },
+    "invoice_statuses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::invoice-status.invoice-status",
+      "mappedBy": "invoice_status"
+    },
+    "invoice_status": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::invoice-status.invoice-status",
+      "inversedBy": "invoice_statuses"
+    },
+    "invoices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::invoice.invoice",
+      "mappedBy": "invoice_status"
     }
   }
 }

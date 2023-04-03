@@ -23,6 +23,25 @@ export type TInvoiceModel = {
   }[];
 }[];
 
+export type TInvoicesPerMonthModel = {
+  month: {
+    name: string;
+    number: number;
+  };
+  invoices: TSingleInvoiceModel[] | [];
+  length: number;
+}[];
+
+export type TSingleInvoiceModel = {
+  id: number;
+  BillingMonth: string;
+  BillingYear: string;
+  website: string;
+  MinPayout: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type TPartnerModel = {
   id: number;
   name: string;
@@ -57,4 +76,71 @@ export type TPartnerPriorityModel = {
   updatedAt: string;
   bgColor: string;
   textColor: string;
+};
+
+export type TAffiliateSiteModel = {
+  id?: number;
+  affiliate_sites: {
+    id: number;
+    name: string;
+    website: string;
+    createdAt: string;
+    updatedAt: string;
+    shortName: string;
+  }[];
+  pagination: {
+    offset: number;
+    limit: number;
+  };
+};
+
+export type TSingleCasinoTagModel = {
+  id: number;
+  name: string;
+  bgColor: string;
+  textColor: string;
+};
+
+export type TCasinoTagModel = {
+  id: number;
+  affiliate_site: TAffiliateSiteModel;
+  Tag: {
+    casino_tags: TSingleCasinoTagModel[];
+    id: number;
+  };
+};
+
+export type TCasinoModel = {
+  id: number;
+  name: string;
+  website: string;
+  createdAt: string;
+  updatedAt: string;
+  MinPayout?: number;
+  shortName: string;
+  status: string;
+  currencies: TCurrenciesModel[];
+  logo: TLogo;
+  partner: TPartnerModel;
+  Tag: TCasinoTagModel[];
+};
+
+export type TCurrenciesModel = {
+  id: number;
+  name: string;
+  type: string;
+  symbol: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type TLogo = {
+  url: string;
+  provider: string;
+  alternativeText: string;
+};
+
+export type TPaginationModel = {
+  offset: number;
+  limit: number;
 };

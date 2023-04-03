@@ -3,11 +3,26 @@ import { Strapi } from "@strapi/strapi";
 export default ({ strapi }: { strapi: Strapi }) => ({
   async getInvoicesPerMonth(ctx) {
     let invoicesPerMonth = [];
-    let statusFilter = ctx.query.status
+    const statusFilter = ctx.query.status
       ? {
-          invoice_status: ctx.query.status,
+          $or: [
+            { invoice_status: ctx.query.status },
+            {
+              invoice_status: {
+                invoice_status: ctx.query.status,
+              },
+            },
+          ],
         }
       : {};
+
+    const monthFilter =
+      ctx.query.month == 0
+        ? {}
+        : {
+            BillingMonth: ctx.query.month,
+          };
+
     const allPartners = await strapi.query("api::partner.partner").findMany({
       populate: true,
     });
@@ -18,9 +33,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
             {
               BillingYear: ctx.query.year,
             },
-            {
-              BillingMonth: ctx.query.month,
-            },
+            monthFilter,
             {
               casino: {
                 partner: partners.id,
@@ -50,6 +63,7 @@ export default ({ strapi }: { strapi: Strapi }) => ({
         });
       }
     }
+
     return invoicesPerMonth;
   },
 });

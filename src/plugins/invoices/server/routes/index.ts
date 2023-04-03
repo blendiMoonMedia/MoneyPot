@@ -35,4 +35,22 @@ export default [
       auth: false,
     },
   },
+  {
+    method: "GET",
+    path: "/affiliate-sites",
+    handler: "myController.affiliateSites",
+    config: {
+      policies: [],
+      auth: false,
+    },
+  },
+  {
+    method: "GET",
+    path: "/affiliate-site-casinos",
+    handler: "myController.affiliateSiteCasinos",
+    config: {
+      policies: [],
+      auth: false,
+    },
+  },
 ];

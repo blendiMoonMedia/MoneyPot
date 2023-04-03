@@ -22,18 +22,23 @@ export const useInvoicesPerMonth = ({
   renderKey,
 }: TUseInvoicePerMonth) => {
   const [invoicesData, setInvoices] = useState([]);
-  const invoicesRequest = async (currentYear: number, statuses: any) => {
-    const { primary } = statuses;
-    try {
-      const invoicesData = await request(
-        `/${pluginId}/invoices-per-month?year=${currentYear}&status=${primary.id}&month=${month}`,
-        {
-          method: "GET",
-        }
-      );
-      setInvoices(invoicesData);
-    } catch (error) {
-      console.log(error);
+  const invoicesRequest = async (
+    currentYear: number,
+    statuses: TInvoiceStatusModel | null
+  ) => {
+    if (statuses) {
+      const { primary } = statuses;
+      try {
+        const invoicesData = await request(
+          `/${pluginId}/invoices-per-month?year=${currentYear}&status=${primary.id}&month=${month}`,
+          {
+            method: "GET",
+          }
+        );
+        setInvoices(invoicesData);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

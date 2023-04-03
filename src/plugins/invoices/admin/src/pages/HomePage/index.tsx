@@ -3,7 +3,7 @@
  * HomePage
  *
  */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   BaseHeaderLayout,
   Layout,
@@ -19,13 +19,14 @@ import { useInvoiceData } from "../../hooks/useInvoiceData";
 import InvoicesPerMonth from "../../components/InovicesPerMonth";
 import { useInvoiceStatuses } from "../../hooks/usetInvoceStatuses";
 import InvoicesStatusPicker from "../../components/InvoicesStatusPicker";
+import { TInvoiceModel, TInvoicesPerMonthModel } from "../../models";
 
 const HomePage = () => {
   const currentDate = new Date();
   const [currentYear, setCurrentYear] = useState(currentDate.getFullYear());
   const { invoiceStatuses, setInvoiceStatuses, isLoading, isInit } =
     useInvoiceStatuses();
-  const { invoicesData }: any = useInvoiceData(
+  const { invoicesData } = useInvoiceData(
     currentYear,
     invoiceStatuses,
     isLoading,

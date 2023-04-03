@@ -29,12 +29,6 @@
       "target": "api::currency.currency",
       "mappedBy": "casino"
     },
-    "affiliate_sites": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::affiliate-site.affiliate-site",
-      "mappedBy": "casino"
-    },
     "partner": {
       "type": "relation",
       "relation": "manyToOne",
@@ -67,6 +61,25 @@
       "type": "component",
       "repeatable": true,
       "component": "csino-tags.tag"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "Active",
+        "Closed",
+        "Blacklisted",
+        "Restricted",
+        "Upcoming"
+      ],
+      "default": "Active",
+      "required": true
+    },
+    "affiliate_sites": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::affiliate-site.affiliate-site",
+      "inversedBy": "casinos",
+      "required": true
     }
   }
 }

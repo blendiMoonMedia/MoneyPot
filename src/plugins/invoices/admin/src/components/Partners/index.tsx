@@ -23,13 +23,16 @@ import {
   ModalBody,
   Textarea,
   ModalFooter,
+  Link,
+  TextButton,
 } from "@strapi/design-system";
-import { TInvoiceModel, TInvoiceStatusModel } from "../../models";
+import { TCasinoModel, TInvoiceModel, TInvoiceStatusModel } from "../../models";
 import PartnersDetails from "../PartnersDetails";
 import PartnersAffiliate from "../ParntersAffiliate";
 import { useInvoiceActions } from "../../hooks/useInvoiceActions";
+import { Information, Write } from "@strapi/icons";
 import { Accordion } from "../Accordion";
-import { Information, Text } from "@strapi/icons";
+import { CasinoModal } from "../Modals";
 
 type TPartners = {
   invoiceData: TInvoiceModel;
@@ -50,6 +53,8 @@ const Partners = ({
 }: TPartners) => {
   const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [casino, setCasino] = useState<TCasinoModel | null>(null);
   const { editInvoices, isUpdating } = useInvoiceActions();
   const [isVisible, setIsVisible] = useState(false);
   const [modalContent, setModalContent] = useState({
@@ -75,6 +80,11 @@ const Partners = ({
     setRenderKey(!renderKey);
   };
 
+  const handleCasinoClick = (casino: TCasinoModel) => {
+    setShowModal(!showModal);
+    setCasino(casino);
+  };
+
   return (
     <Box paddingBottom={4}>
       <Grid gridCols={1} gap={8}>
@@ -83,7 +93,7 @@ const Partners = ({
             <Box
               padding={4}
               hasRadius
-              background="neutral100"
+              background="neutral150"
               shadow="tableShadow"
               key={index}
             >
@@ -102,59 +112,96 @@ const Partners = ({
                 hasRadius={true}
                 marginBottom={4}
                 shadow="filterShadow"
-                background="neutral150"
+                background="neutral100"
               >
-                <Box className="rounded-lg">
-                  <RawTable background={"neutral100"}>
+                <Box className="rounded-lg" background={"neutral100"}>
+                  <RawTable className={"w-full"}>
                     <Thead className="w-full">
-                      <Tr>
+                      <Tr background={"neutral100"}>
                         <Th>
-                          <Typography className={"p-4"}>ID</Typography>
+                          <Typography
+                            fontWeight={"bold"}
+                            variant={"sigma"}
+                            className={"px-4"}
+                          >
+                            Invoice name
+                          </Typography>{" "}
                         </Th>
                         <Th>
-                          <Typography>Invoice name</Typography>{" "}
+                          <Typography fontWeight={"bold"} variant={"sigma"}>
+                            Casino
+                          </Typography>
                         </Th>
                         <Th>
-                          <Typography>Casino</Typography>
+                          <Typography fontWeight={"bold"} variant={"sigma"}>
+                            Aff. Site
+                          </Typography>
                         </Th>
                         <Th>
-                          <Typography>Aff. Site</Typography>
+                          <Typography fontWeight={"bold"} variant={"sigma"}>
+                            Month
+                          </Typography>
                         </Th>
                         <Th>
-                          <Typography>Month</Typography>
+                          <Typography fontWeight={"bold"} variant={"sigma"}>
+                            Payment Type
+                          </Typography>
                         </Th>
                         <Th>
-                          <Typography>Payment Type</Typography>
-                        </Th>
-                        <Th>
-                          <Typography>Amount</Typography>
+                          <Typography fontWeight={"bold"} variant={"sigma"}>
+                            Amount
+                          </Typography>
                         </Th>
                         <Th scope="col" className="p-4">
-                          <Typography className="sr-only">Status</Typography>
+                          <Typography
+                            fontWeight={"bold"}
+                            variant={"sigma"}
+                            className="sr-only"
+                          >
+                            Status
+                          </Typography>
                         </Th>
                       </Tr>
                     </Thead>
                     <Tbody className="divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
                       {singleInvoiceMonth.invoices.map(
                         (singleInvoice: any, index: number) => (
-                          <Tr key={index}>
+                          <Tr
+                            key={index}
+                            background={
+                              index % 2 === 0 ? "neutral150" : "neutral200"
+                            }
+                          >
                             <Td className="text-sm font-medium text-gray-900">
-                              <Typography className={"p-4"}>
-                                {singleInvoice?.id}
+                              <Typography className={"px-4"}>
+                                {singleInvoice?.name}
                               </Typography>
                             </Td>
-                            <Td className="text-sm font-medium text-gray-900">
-                              <Typography>{singleInvoice?.name}</Typography>
-                            </Td>
-                            <Td className="text-sm font-medium text-gray-900">
-                              <Typography>
+                            <Td className="text-sm font-medium grid gap-4">
+                              <TextButton
+                                onClick={() =>
+                                  handleCasinoClick(singleInvoice.casino)
+                                }
+                                endIcon={<Information />}
+                              >
                                 {singleInvoice.casino?.name}
-                              </Typography>
+                              </TextButton>
+                              <Link
+                                to={`/content-manager/collectionType/api::casino.casino/${singleInvoice.casino?.id}`}
+                                endIcon={<Write />}
+                              >
+                                Edit Casino
+                              </Link>
                             </Td>
                             <Td className="text-sm font-medium text-gray-900">
                               <Typography>
-                                {" "}
-                                {singleInvoice.affiliate_site?.name ?? false}
+                                <Link
+                                  to={`/content-manager/collectionType/api::affiliate-site.affiliate-site/${singleInvoice.affiliate_site?.id}}`}
+                                  endIcon={<Write />}
+                                  title={singleInvoice.affiliate_site?.website}
+                                >
+                                  {singleInvoice.affiliate_site?.name ?? false}
+                                </Link>
                               </Typography>
                             </Td>
                             <Td className="text-sm font-medium text-gray-900">
@@ -274,6 +321,14 @@ const Partners = ({
             }
           />
         </ModalLayout>
+      )}
+      {/*  Modals */}
+      {showModal && (
+        <CasinoModal
+          casino={casino}
+          showModal={showModal}
+          setShowModal={setShowModal}
+        />
       )}
     </Box>
   );

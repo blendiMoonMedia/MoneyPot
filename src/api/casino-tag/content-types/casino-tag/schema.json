@@ -12,10 +12,16 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "TagName": {
+    "name": {
       "type": "string",
       "required": true,
       "unique": true
+    },
+    "bgColor": {
+      "type": "string"
+    },
+    "textColor": {
+      "type": "string"
     }
   }
 }

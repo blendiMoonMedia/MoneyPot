@@ -12,7 +12,7 @@ type TAccordion = {
 export const Accordion = ({ partner, children, numberOfInv }: TAccordion) => {
   const [isVisible, setIsVisible] = useState(false);
   return (
-    <Box className={"pb-2 rounded-lg"} background={"neutral150"}>
+    <Box className={"pb-2 rounded-lg"} background={"neutral100"}>
       <div
         className={
           "flex items-center p-1 justify-between w-full cursor-pointer"
@@ -21,12 +21,12 @@ export const Accordion = ({ partner, children, numberOfInv }: TAccordion) => {
       >
         <div>
           <img
-            src={partner.logo?.url}
+            src={partner?.logo?.url}
             height={"30px"}
             width={"30px"}
             className={"inline m-2"}
           />
-          <Typography className={"font-bold"}>{partner.name}</Typography> -{" "}
+          <Typography className={"font-bold"}>{partner?.name}</Typography> -{" "}
           <Typography
             style={{
               color: partner?.partner_priority?.textColor,

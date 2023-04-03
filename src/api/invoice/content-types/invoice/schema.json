@@ -25,9 +25,9 @@
     },
     "invoice_status": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "manyToOne",
       "target": "api::invoice-status.invoice-status",
-      "required": true
+      "inversedBy": "invoices"
     },
     "payment_type": {
       "type": "relation",
