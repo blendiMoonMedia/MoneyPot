@@ -16,8 +16,6 @@ export const populateReportsData = async (event) => {
     where: event.params.where,
     populate: ["affiliate_site", "casino"],
   });
-  const casinoShortName = currentReport?.casino.shortName;
-  const affSiteShortName = currentReport?.affiliate_site.shortName;
   const billingMonth = event.params.data?.BillingMonth;
   const billingYear = event.params.data?.BillingYear;
   const revShare = event.params.data?.RevShare;
@@ -28,19 +26,21 @@ export const populateReportsData = async (event) => {
   let currentCasino = null;
   let currentAffSite = null;
 
-  if (!casinoShortName) {
-    currentCasino = await strapi.db.query("api::casino.casino").findOne({
-      where: event.params.data.casino.connect.id,
+  currentCasino = await strapi.db.query("api::casino.casino").findOne({
+    where: {
+      id:
+        event?.params?.data?.casino?.connect[0]?.id ?? currentReport?.casino.id,
+    },
+  });
+  currentAffSite = await strapi.db
+    .query("api::affiliate-site.affiliate-site")
+    .findOne({
+      where: {
+        id:
+          event.params.data?.affiliate_site?.connect[0]?.id ??
+          currentReport?.affiliate_site.id,
+      },
     });
-  }
-  if (!affSiteShortName) {
-    currentAffSite = await strapi.db
-      .query("api::affiliate-site.affiliate-site")
-      .findOne({
-        where: event.params.data.affiliate_site.connect.id,
-      });
-  }
-
   if (revShare || revShare === 0) {
     event.params.data.TotalCommission = revShare + cpAsRev + fixedFeeRev;
   }
@@ -56,10 +56,10 @@ export const populateReportsData = async (event) => {
 
   // AffiliateNGR
   const nrg = event.params.data.NGR;
-  if ((revShare || revShare === 0) && (nrg !== 0)) {
+  if ((revShare || revShare === 0) && nrg !== 0) {
     event.params.data.AffiliateNGR = (revShare / nrg) * 100;
   }
-  if(revShare !== 0 || cpAsRev !== 0 || fixedFeeRev !== 0){
+  if (revShare !== 0 || cpAsRev !== 0 || fixedFeeRev !== 0) {
     event.params.data.AffiliateTotalCommission =
       (revShare / (revShare + cpAsRev + fixedFeeRev)) * 100;
   }
@@ -76,9 +76,9 @@ export const populateReportsData = async (event) => {
 
   if (billingYear || billingMonth) {
     event.params.data.name =
-      (casinoShortName ?? currentCasino?.shortName) +
+      currentCasino?.shortName +
       "/" +
-      (affSiteShortName ?? currentAffSite?.shortName) +
+      currentAffSite?.shortName +
       "/" +
       billingMonth +
       "/" +
